@@ -14,11 +14,15 @@ class TextInput extends Component {
 
   onChange(e) {
     const { value } = e.target;
+    const { onChange, required } = this.props;
 
-    const error = !englishLettersOnly.test(value);
+    let error;
+    if(required || value.length > 0) {
+      error = !englishLettersOnly.test(value);
+    }
 
     this.setState({value, error});
-    this.props.onChange({value, error});
+    onChange({value, error});
   }
 
   render() {
